@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edu.XO</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            height: 100vh;
+                      background-image: linear-gradient(
+  45deg,
+  hsl(163deg 62% 43%) 0%,
+  hsl(154deg 41% 53%) 11%,
+  hsl(144deg 36% 60%) 22%,
+  hsl(132deg 31% 66%) 33%,
+  hsl(117deg 27% 70%) 44%,
+  hsl(103deg 27% 74%) 56%,
+  hsl(91deg 26% 77%) 67%,
+  hsl(80deg 23% 81%) 78%,
+  hsl(70deg 19% 85%) 89%,
+  hsl(60deg 10% 90%) 100%
+);
+    
+        }
+
+        #dashboard {
+            width: 250px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: width 0.3s;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        #dashboard-toggle {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            font-size: 20px;
+            color: #3498db;
+        }
+
+        #dashboard-content {
+            display: block;
+        }
+
+        .score-box {
+            background-color: #3498db;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 4px;
+            margin: 5px;
+            display: inline-block;
+        }
+
+        #main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            text-align: center;
+             font-size: 35px; 
+            padding: 10px 20px; 
+        }
+
+        h1 {
+            border: 2px solid #fff;
+            padding: 15px;
+            display: inline-block;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 2em;
+        }
+
+        button {
+            width: 200px;
+            padding: 15px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 10px;
+            background-color: #2ecc71;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #27ae60;
+        }
+
+        .icon {
+            font-size: 24px;
+            margin-right: 10px;
+        }
+
+        .badge {
+            background-color: #3498db;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 4px;
+            margin: 5px;
+            display: inline-block;
+        }
+
+        @media only screen and (max-width: 768px) {
+            #dashboard {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <img src ="/Users/sanjay/Downloads/photo_2024-02-03 15.14.50.jpeg">
+    </div>
+    <div id="dashboard">
+        <div id="dashboard-toggle" onclick="toggleDashboardContent()">&#9660;</div>
+        <h2>User Profile</h2>
+        <p>Name: HYPERVERGE</p>
+        <p>ACHIEVEMENTS:</p>
+        <div id="dashboard-content">
+            <p class="badge">Student</p>
+            <p class="badge">Level 3</p>
+            <p class="badge">Achievements: 5</p>
+            <p class="score-box" id="score">Score: 0</p>
+        </div>
+    </div>
+    <div id="main-content">
+        <h1><i class="icon fas fa-graduation-cap"></i>Edu.XO</h1>
+        <a href="{% url 'home' %}"><button><i class="icon fas fa-plus-circle"></i>Create Flashcard</button></a>
+        <a href="{% url 'flashcard_list' %}"><button><i class="icon fas fa-gamepad"></i>show flashcard</button></a>
+        <a href="{% url 'quiz' %}"><button><i class="icon fas fa-question-circle"></i>Quiz</button></a>
+        <a href="{% url 'xo' %}"><button><i class="icon fas fa-gamepad"></i>Play Game</button></a>
+        
+    </div>
+    <script>
+    let score = 0;
+
+    function toggleDashboardContent() {
+        var dashboardContent = document.getElementById("dashboard-content");
+        dashboardContent.style.display = (dashboardContent.style.display === "none" || dashboardContent.style.display === "") ? "block" : "none";
+    }
+
+    function updateScore(newScore) {
+        score = newScore;
+        document.getElementById("score").innerText = "Score: " + score;
+    }
+</script>
+    <script>
+    function checkAnswer(button) {
+        const flashcard = button.closest('.flashcard');
+        const userInput = flashcard.querySelector('input').value.trim().toLowerCase();
+        const correctAnswer = flashcard.dataset.answer.trim().toLowerCase();
+        const scoreBox = document.getElementById('score');
+
+        if (userInput === correctAnswer) {
+            flashcard.classList.remove('incorrect');
+            flashcard.classList.add('correct');
+            updateScore(score + 1);
+        } else {
+            flashcard.classList.remove('correct');
+            flashcard.classList.add('incorrect');
+        }
+    }
+</script>
+
+
+
+    <script>
+        function toggleDashboardContent() {
+            var dashboardContent = document.getElementById("dashboard-content");
+            dashboardContent.style.display = (dashboardContent.style.display === "none" || dashboardContent.style.display === "") ? "block" : "none";
+        }
+    </script>
+</body>
+</html>

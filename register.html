@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2; /* Light grey background color */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333; /* Text color */
+        }
+
+        form {
+            background-color: #fff; /* White background for the form */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
+        }
+
+        button {
+            width: 100%; /* Button takes full width of its container */
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #2ecc71; /* Green button background color */
+            color: #fff; /* Button text color */
+            border: none;
+            border-radius: 4px;
+        }
+
+        button:hover {
+            background-color: #27ae60; /* Button background color on hover */
+        }
+    </style>
+</head>
+<body>
+    <h2>Register</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Register</button>
+    </form>
+</body>
+</html>
